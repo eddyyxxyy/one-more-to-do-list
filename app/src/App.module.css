@@ -15,11 +15,12 @@
 
 .newTask {
   width: 100%;
-  max-width: 72rem;
+  max-width: 76rem;
   position: absolute;
   z-index: 1;
   display: flex;
   gap: 8px;
+  padding: 0 2rem;
   margin-top: -2.7rem;
 }
 
