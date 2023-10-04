@@ -4,7 +4,7 @@ import styles from './Button.module.css';
 
 export function Button({
   text,
-  icon: Icon,
+  icon: Icon = undefined,
   iconSize = 16,
   iconWeight = 'regular',
   ...rest
