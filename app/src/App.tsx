@@ -2,9 +2,10 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 
 import { Header } from './components/Header';
 import { Input } from './components/Input';
-import { ButtonPlus } from './components/ButtonPlus';
+import { Button } from './components/Button';
 
 import styles from './App.module.css';
+import { PlusCircle } from '@phosphor-icons/react';
 
 export function App() {
   const [newTask, setNewTask] = useState('');
@@ -37,10 +38,13 @@ export function App() {
             placeholder="Adicione uma nova tarefa"
             required
           />
-          <ButtonPlus
+          <Button
             type="submit"
             text="Criar"
             title="Criar tarefa"
+            icon={PlusCircle}
+            iconSize={18}
+            iconWeight="regular"
             aria-label="Criar tarefa"
             disabled={!newTask}
           />
