@@ -31,5 +31,5 @@ body {
 body,
 input,
 button {
-  line-height: 1.4;
+  font-family: 'Inter', sans-serif;
 }
