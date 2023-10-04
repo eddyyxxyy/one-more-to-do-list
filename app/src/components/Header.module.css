@@ -5,24 +5,49 @@
   margin: 0 auto;
 }
 
-.header > div {
+.header > a {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1.2rem;
+  text-decoration: none;
+  transition: filter 0.2s ease-in-out;
 }
 
-.header > div > img {
+.header > a > .githubLogo {
+  height: 3.2rem;
+  width: 0;
+  background-color: var(--purple-100);
+  border-radius: 50%;
+  overflow: hidden;
+  transition:
+    width 0.2s ease-in-out,
+    background-color 0.3s ease-in-out,
+    padding 0.3s ease-in-out;
+}
+
+.header > a:hover,
+.header > a:focus {
+  filter: brightness(1.15);
+}
+
+.header > a:hover > .githubLogo,
+.header > a:focus > .githubLogo {
+  width: 3.2rem;
+  padding: 0.4rem;
+}
+
+.header > a > img {
   height: 3.2rem;
   width: 2.2rem;
 }
 
-.header > div > h1 {
+.header > a > h1 {
   font-weight: 900;
   font-size: 4rem;
   color: var(--blue-300);
 }
 
-.header > div > h1 > span {
+.header > a > h1 > span {
   color: var(--purple-100);
 }

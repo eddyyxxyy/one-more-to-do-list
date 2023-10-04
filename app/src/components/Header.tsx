@@ -1,16 +1,28 @@
+import { GithubLogo } from '@phosphor-icons/react';
 import rocketIcon from '../assets/rocket-icon.svg';
 
 import styles from './Header.module.css';
 
 export function Header() {
   return (
-    <div className={styles.header}>
-      <div>
-        <img src={rocketIcon} alt="Rocket launching icon" />{' '}
+    <header className={styles.header}>
+      <a
+        href="https://github.com/eddyyxxyy/one-more-to-do-list"
+        aria-label="Código fonte da aplicação no Github"
+        title="Código fonte da aplicação no Github"
+        rel="noreferrer"
+        target="_blank"
+      >
+        <img src={rocketIcon} alt="Ícone de um foguete sendo lançado" />
         <h1>
           to<span>do</span>
         </h1>
-      </div>
-    </div>
+        <GithubLogo
+          className={styles.githubLogo}
+          size={24}
+          color="var(--blue-300)"
+        />
+      </a>
+    </header>
   );
 }
