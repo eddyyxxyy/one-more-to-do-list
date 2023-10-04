@@ -19,7 +19,7 @@
   position: absolute;
   z-index: 1;
   display: flex;
-  gap: 0.8px;
+  gap: 8px;
   margin-top: -2.7rem;
 }
 
