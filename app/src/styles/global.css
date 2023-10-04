@@ -1,0 +1,35 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  font-size: clamp(40%, 1% + 2vw, 62.5%);
+
+  --blue-100: #1e6f9f;
+  --blue-300: #4ea8de;
+
+  --gray-100: #0d0d0d;
+  --gray-200: #1a1a1a;
+  --gray-300: #262626;
+  --gray-400: #333333;
+  --gray-500: #808080;
+  --gray-600: #d9d9d9;
+  --gray-700: #f2f2f2;
+
+  --purple-100: #5e60ce;
+  --purple-300: #8284fa;
+
+  --red-300: #e25858;
+}
+
+body {
+  font-size: 1.6rem;
+}
+
+body,
+input,
+button {
+  line-height: 1.4;
+}
