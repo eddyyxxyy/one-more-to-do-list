@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes, ComponentType } from 'react';
 
-import { IconProps, IconWeight } from '@phosphor-icons/react'
+import { IconProps, IconWeight } from '@phosphor-icons/react';
 
 export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
