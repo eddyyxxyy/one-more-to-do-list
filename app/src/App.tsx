@@ -1,16 +1,25 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import { Header } from './components/Header';
 import { Input } from './components/Input';
 import { Button } from './components/Button';
 
+import {
+  CheckCircle,
+  Circle,
+  ClipboardText,
+  PlusCircle,
+} from '@phosphor-icons/react';
+
+import { ITask } from './types';
+
 import styles from './App.module.css';
-import { ClipboardText, PlusCircle } from '@phosphor-icons/react';
 
 export function App() {
-  const [tasks, setTasks] = useState<object[]>([]);
+  const [tasks, setTasks] = useState<ITask[]>([]);
   const [createdTasks, setCreatedTasks] = useState(0);
-  // const [finishedTasks, setFinishedTasks] = useState(0); -> Contains the sum of all finished tasks
+  const [finishedTasks, setFinishedTasks] = useState(0);
   const [newTaskDescription, setNewTaskDescription] = useState('');
 
   function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
@@ -20,23 +29,42 @@ export function App() {
   function handleCreateTask(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
+    const task: ITask = {
+      id: uuidv4(),
+      description: newTaskDescription,
+      isFinished: false,
+    };
+
+    setTasks((prevState) => {
+      const newTasks = [...prevState, task];
+      localStorage.setItem('@todo-list-tasks:', JSON.stringify(newTasks));
+      return newTasks;
+    });
+
     setCreatedTasks((prevState) => prevState + 1);
   }
 
   useEffect(() => {
-    const savedTasks = localStorage.getItem('@todo-list-tasks:') ?? 0;
+    localStorage.setItem('@todo-list-tasks:', JSON.stringify(tasks));
+    setCreatedTasks(tasks.length);
+  }, [tasks]);
+
+  useEffect(() => {
+    const savedTasks = localStorage.getItem('@todo-list-tasks:');
 
     if (savedTasks) {
-      const tasksToBeInserted = JSON.parse(savedTasks) as object[];
+      const tasksToBeInserted = JSON.parse(savedTasks) as ITask[];
+      const finishedTasks = tasksToBeInserted.filter(
+        (task) => task.isFinished === true,
+      );
 
       setCreatedTasks(tasksToBeInserted.length);
+      setFinishedTasks(finishedTasks.length);
       setTasks([...tasksToBeInserted]);
-
-      return;
+    } else {
+      setTasks([]);
     }
-
-    setTasks([]);
-  }, [createdTasks]);
+  }, []);
 
   return (
     <div className={styles.app}>
@@ -74,7 +102,7 @@ export function App() {
               Tarefas criadas <span>{createdTasks}</span>
             </h4>
             <h4>
-              Concluídas <span>0</span>
+              Concluídas <span>{finishedTasks}</span>
             </h4>
           </header>
           {!tasks.length ? (
@@ -90,7 +118,34 @@ export function App() {
               </div>
             </div>
           ) : (
-            <ul className={styles.tasksList}></ul>
+            <ul className={styles.tasksList}>
+              {tasks.map((task) => (
+                <li key={task.id} className={styles.task}>
+                  <div className={styles.taskInfo}>
+                    {task.isFinished ? (
+                      <button
+                        type="button"
+                        title="Marcar como concluída"
+                        aria-label="Marcar como concluída"
+                      >
+                        <CheckCircle
+                          size={18}
+                          weight="fill"
+                          color="var(--purple-100)"
+                        />
+                      </button>
+                    ) : (
+                      <Circle
+                        size={18}
+                        weight="regular"
+                        color="var(--blue-300)"
+                      />
+                    )}
+                    {task.description}
+                  </div>
+                </li>
+              ))}
+            </ul>
           )}
         </section>
       </main>

@@ -8,3 +8,9 @@ export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   iconSize: number;
   iconWeight: IconWeight;
 }
+
+export interface ITask {
+  id: string;
+  description: string;
+  isFinished: boolean;
+}
