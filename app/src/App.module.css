@@ -1,8 +1,36 @@
 .app {
   height: 100vh;
-
   display: grid;
   grid-template-rows: 20rem 1fr;
-
   background-color: var(--gray-200);
+}
+
+.main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 2rem 2rem;
+  overflow: auto;
+}
+
+.newTask {
+  width: 72rem;
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  gap: 0.8px;
+  margin-top: -2.7rem;
+}
+
+.newTask > input {
+  color: var(--gray-700);
+}
+
+.newTask > input:focus {
+  outline: 2px solid var(--purple-100);
+}
+
+.newTask > input::placeholder {
+  color: var(--gray-500);
 }
