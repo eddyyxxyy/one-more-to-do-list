@@ -1,5 +1,5 @@
-import { InputHTMLAttributes } from "react";
+import { ButtonHTMLAttributes } from 'react';
 
-export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
-  
+export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  text: string;
 }
