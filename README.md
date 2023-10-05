@@ -1,8 +1,8 @@
 # One More ToDo List
 
-ToDo List é uma página web para criação e controle de tarefas.
+[ToDo List](https://one-more-to-do-list.vercel.app/ 'https://one-more-to-do-list.vercel.app/') é uma página web para criação e controle de tarefas.
 
-Acesse: ~link do deploy~
+Acesse: [https://one-more-to-do-list.vercel.app/](<(https://one-more-to-do-list.vercel.app/)>)
 
 > Esse projeto é um dos desafios da trilha de React do Ignite. Ou seja, é fornecido somente um guia de estilos para o visual da aplicação e seu conceito. Todo o código, estrutura de pastas, dependências e técnicas de programação usadas são advindas de quem programa, de mim no caso.
 
