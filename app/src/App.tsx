@@ -45,6 +45,14 @@ export function App() {
       isFinished: false,
     };
 
+    if (
+      task.description.trim().length === 0 ||
+      !/^(?=.*[a-zA-Z0-9]).+$/.test(task.description.trim())
+    ) {
+      setNewTaskDescription('');
+      return;
+    }
+
     setTasks((prevState) => {
       const newTasks = [...prevState, task];
       localStorage.setItem('@todo-list-tasks:', JSON.stringify(newTasks));
@@ -133,6 +141,7 @@ export function App() {
               onChange={handleInputChange}
               aria-label="Adicione uma nova tarefa"
               placeholder="Adicione uma nova tarefa"
+              minLength={1}
               required
             />
             <Button
@@ -143,7 +152,10 @@ export function App() {
               iconSize={18}
               iconWeight="regular"
               aria-label="Criar tarefa"
-              disabled={!newTaskDescription}
+              disabled={
+                !newTaskDescription ||
+                !/^(?=.*[a-zA-Z0-9]).+$/.test(newTaskDescription.trim())
+              }
             />
           </form>
           <section className={styles.tasks}>
