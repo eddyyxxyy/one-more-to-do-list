@@ -11,6 +11,7 @@
   flex-direction: column;
   align-items: center;
   padding: 0 2rem 2rem;
+  overflow-y: auto;
 }
 
 .newTask {
@@ -93,4 +94,69 @@
 .noTasksCreated > div > h3 {
   font-weight: 700;
   font-size: 1.6rem;
+}
+
+.tasksList {
+  width: 100%;
+  list-style: none;
+}
+
+.task + .task {
+  margin-top: 12px;
+}
+
+.task {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background-color: var(--gray-300);
+  padding: 1.6rem;
+  border: 1px solid var(--gray-400);
+  border-radius: 8px;
+}
+
+.task > button {
+  height: 18px;
+  background: none;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.task > button:hover,
+.task > button:focus {
+  filter: brightness(1.1);
+}
+
+.task > button:focus {
+  outline: 2px solid var(--blue-300);
+}
+
+.taskInfo {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+}
+
+.taskInfo > p {
+  font-size: 1.4rem;
+  text-align: justify;
+  color: var(--gray-700);
+  line-break: anywhere;
+  line-height: 1.4;
+  padding-right: 2rem;
+}
+
+.task > button.deleteTask {
+  height: 18px;
+  color: var(--gray-500);
+  border: none;
+  border-radius: 8px;
+  transition: color 0.2s ease-out;
+}
+
+.task > button.deleteTask:hover,
+.task > button.deleteTask:focus {
+  color: var(--red-300);
 }

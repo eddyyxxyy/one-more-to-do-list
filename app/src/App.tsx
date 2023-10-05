@@ -11,6 +11,7 @@ import {
   Circle,
   ClipboardText,
   PlusCircle,
+  Trash,
 } from '@phosphor-icons/react';
 
 import { ITask } from './types';
@@ -19,8 +20,8 @@ import styles from './App.module.css';
 
 export function App() {
   const [tasks, setTasks] = useState<ITask[]>([]);
-  const [createdTasks, setCreatedTasks] = useState(0);
-  const [finishedTasks, setFinishedTasks] = useState(0);
+  const [createdTasks, setCreatedTasks] = useState<number>(0);
+  const [finishedTasks, setFinishedTasks] = useState<number>(0);
   const [newTaskDescription, setNewTaskDescription] = useState('');
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -44,6 +45,37 @@ export function App() {
     });
 
     setCreatedTasks((prevState) => prevState + 1);
+    setNewTaskDescription('');
+  }
+
+  function handleMarkAsComplete(id: string) {
+    const newTasks = tasks.map((task) => {
+      if (task.id === id) {
+        return { ...task, isFinished: !task.isFinished };
+      }
+      return task;
+    });
+
+    setTasks([...newTasks]);
+
+    const finishedCount = newTasks.filter(
+      (task) => task.isFinished === true,
+    ).length;
+    setFinishedTasks(finishedCount);
+    localStorage.setItem('@todo-list-tasks:', JSON.stringify(newTasks));
+  }
+
+  function handleRemoveTask(id: string) {
+    const newTasks = tasks.filter((task) => task.id !== id);
+
+    const finishedCount = newTasks.filter(
+      (task) => task.isFinished === true,
+    ).length;
+
+    setTasks([...newTasks]);
+    setCreatedTasks(newTasks.length);
+    setFinishedTasks(finishedCount);
+    localStorage.setItem('@todo-list-tasks:', JSON.stringify(newTasks));
   }
 
   useEffect(() => {
@@ -52,17 +84,18 @@ export function App() {
     if (savedTasks) {
       try {
         const tasksToBeInserted = JSON.parse(savedTasks) as ITask[];
-        const finishedTasks = tasksToBeInserted.filter(
+
+        const finishedCount = tasksToBeInserted.filter(
           (task) => task.isFinished === true,
-        );
+        ).length;
 
         setCreatedTasks(tasksToBeInserted.length);
-        setFinishedTasks(finishedTasks.length);
+        setFinishedTasks(finishedCount);
         setTasks([...tasksToBeInserted]);
       } catch {
         setModalIsOpen(true);
         setTasks([]);
-        localStorage.setItem('@todo-list-tasks:', JSON.stringify(tasks));
+        localStorage.setItem('@todo-list-tasks:', JSON.stringify([]));
       }
     } else {
       setTasks([]);
@@ -131,28 +164,46 @@ export function App() {
               <ul className={styles.tasksList}>
                 {tasks.map((task) => (
                   <li key={task.id} className={styles.task}>
-                    <div className={styles.taskInfo}>
-                      {task.isFinished ? (
-                        <button
-                          type="button"
-                          title="Marcar como concluída"
-                          aria-label="Marcar como concluída"
-                        >
-                          <CheckCircle
-                            size={18}
-                            weight="fill"
-                            color="var(--purple-100)"
-                          />
-                        </button>
-                      ) : (
+                    {task.isFinished ? (
+                      <button
+                        type="button"
+                        title="Desmarcar como concluída"
+                        aria-label="Desmarcar como concluída"
+                        onClick={() => handleMarkAsComplete(task.id)}
+                      >
+                        <CheckCircle
+                          className={styles.checked}
+                          size={18}
+                          weight="fill"
+                          color="var(--purple-100)"
+                        />
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        title="Marcar como concluída"
+                        aria-label="Marcar como concluída"
+                        onClick={() => handleMarkAsComplete(task.id)}
+                      >
                         <Circle
                           size={18}
                           weight="regular"
                           color="var(--blue-300)"
                         />
-                      )}
-                      {task.description}
+                      </button>
+                    )}
+                    <div className={styles.taskInfo}>
+                      <p>{task.description}</p>
                     </div>
+                    <button
+                      className={styles.deleteTask}
+                      type="button"
+                      title="Remover tarefa"
+                      aria-label="Remover tarefa"
+                      onClick={() => handleRemoveTask(task.id)}
+                    >
+                      <Trash size={20} />
+                    </button>
                   </li>
                 ))}
               </ul>
