@@ -1,4 +1,10 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import {
+  CSSProperties,
+  ChangeEvent,
+  FormEvent,
+  useEffect,
+  useState,
+} from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { Header } from './components/Header';
@@ -24,6 +30,7 @@ export function App() {
   const [finishedTasks, setFinishedTasks] = useState<number>(0);
   const [newTaskDescription, setNewTaskDescription] = useState<string>('');
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+  const [initialTasksCount, setInitialTasksCount] = useState<number>(0);
 
   function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
     setNewTaskDescription(event.target.value);
@@ -92,6 +99,7 @@ export function App() {
         setCreatedTasks(tasksToBeInserted.length);
         setFinishedTasks(finishedCount);
         setTasks([...tasksToBeInserted]);
+        setInitialTasksCount(tasksToBeInserted.length);
       } catch {
         setModalIsOpen(true);
         setTasks([]);
@@ -162,8 +170,16 @@ export function App() {
               </div>
             ) : (
               <ul className={styles.tasksList}>
-                {tasks.map((task) => (
-                  <li key={task.id} className={styles.task}>
+                {tasks.map((task, index) => (
+                  <li
+                    key={task.id}
+                    className={styles.task}
+                    style={
+                      index < initialTasksCount
+                        ? ({ '--delay': `${index * 0.2}s` } as CSSProperties)
+                        : {}
+                    }
+                  >
                     {task.isFinished ? (
                       <button
                         type="button"

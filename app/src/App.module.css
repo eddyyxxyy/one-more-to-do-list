@@ -11,7 +11,22 @@
   flex-direction: column;
   align-items: center;
   padding: 0 2rem 2rem;
-  overflow-y: auto;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--blue-100) var(--gray-100);
+}
+
+.main::-webkit-scrollbar {
+  width: 8px;
+}
+
+.main::-webkit-scrollbar-track {
+  background: var(--gray-100);
+}
+
+.main::-webkit-scrollbar-thumb {
+  background-color: var(--blue-100);
+  border-radius: 20px;
 }
 
 .newTask {
@@ -27,6 +42,9 @@
 
 .newTask > input {
   color: var(--gray-700);
+  box-shadow:
+    0 8px 16px 0 rgba(0, 0, 0, 0.2),
+    0 12px 26px 0 rgba(0, 0, 0, 0.19);
 }
 
 .newTask > input:focus {
@@ -35,6 +53,12 @@
 
 .newTask > input::placeholder {
   color: var(--gray-500);
+}
+
+.newTask > button {
+  box-shadow:
+    0 8px 16px 0 rgba(0, 0, 0, 0.2),
+    0 12px 26px 0 rgba(0, 0, 0, 0.19);
 }
 
 .tasks {
@@ -48,6 +72,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2.4rem;
+  animation: fade-appear 0.25s ease-in forwards;
 }
 
 .tasksHeader > h4 {
@@ -83,6 +108,7 @@
   padding: 6.4rem;
   border-top: 1px solid var(--gray-400);
   border-radius: 8px;
+  animation: fade-appear 0.25s ease-in forwards;
 }
 
 .noTasksCreated > div {
@@ -106,6 +132,7 @@
 }
 
 .task {
+  opacity: 0;
   display: flex;
   align-items: flex-start;
   gap: 12px;
@@ -113,6 +140,7 @@
   padding: 1.6rem;
   border: 1px solid var(--gray-400);
   border-radius: 8px;
+  animation: slide-right-appear 0.2s ease-in var(--delay, 0s) forwards;
 }
 
 .task > button {
@@ -150,13 +178,39 @@
 
 .task > button.deleteTask {
   height: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: var(--gray-500);
   border: none;
   border-radius: 8px;
-  transition: color 0.2s ease-out;
+  transition:
+    color 0.2s ease-out,
+    background-color 0.2s ease-out;
 }
 
 .task > button.deleteTask:hover,
 .task > button.deleteTask:focus {
+  height: 18px;
+  background-color: var(--gray-400);
   color: var(--red-300);
+  border-radius: 4px;
+  outline: 1px solid var(--gray-500);
+}
+
+@keyframes fade-appear {
+  0% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes slide-right-appear {
+  0% {
+    opacity: 0;
+    transform: translateX(-2rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
