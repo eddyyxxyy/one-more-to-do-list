@@ -2,10 +2,11 @@ import { FormEvent } from 'react';
 
 import { Button } from './Button';
 
+import { CloudSlash, SmileySad } from '@phosphor-icons/react';
+
 import { IConfirmationModalProps } from '../types';
 
 import styles from './ConfirmationModal.module.css';
-import { CloudSlash, SmileySad } from '@phosphor-icons/react';
 
 export function ConfirmationModal({
   title,

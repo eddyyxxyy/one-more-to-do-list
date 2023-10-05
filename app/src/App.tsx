@@ -22,8 +22,8 @@ export function App() {
   const [tasks, setTasks] = useState<ITask[]>([]);
   const [createdTasks, setCreatedTasks] = useState<number>(0);
   const [finishedTasks, setFinishedTasks] = useState<number>(0);
-  const [newTaskDescription, setNewTaskDescription] = useState('');
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [newTaskDescription, setNewTaskDescription] = useState<string>('');
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
 
   function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
     setNewTaskDescription(event.target.value);

@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, ComponentType, Dispatch, FormEventHandler } from 'react';
+import { ButtonHTMLAttributes, ComponentType, Dispatch } from 'react';
 
 import { IconProps, IconWeight } from '@phosphor-icons/react';
 

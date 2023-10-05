@@ -1,5 +1,6 @@
-import { GithubLogo } from '@phosphor-icons/react';
 import rocketIcon from '../assets/rocket-icon.svg';
+
+import { GithubLogo } from '@phosphor-icons/react';
 
 import styles from './Header.module.css';
 
