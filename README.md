@@ -2,7 +2,7 @@
 
 [ToDo List](https://one-more-to-do-list.vercel.app/ 'https://one-more-to-do-list.vercel.app/') é uma página web para criação e controle de tarefas.
 
-Acesse: [https://one-more-to-do-list.vercel.app/](<(https://one-more-to-do-list.vercel.app/)>)
+Acesse: [https://one-more-to-do-list.vercel.app/](https://one-more-to-do-list.vercel.app/)
 
 > Esse projeto é um dos desafios da trilha de React do Ignite. Ou seja, é fornecido somente um guia de estilos para o visual da aplicação e seu conceito. Todo o código, estrutura de pastas, dependências e técnicas de programação usadas são advindas de quem programa, de mim no caso.
 
@@ -29,7 +29,9 @@ Sendo essa sua única limitação, o app oferece uma interface limpa, responsiva
 ## Ambiente de Desenvolvimento
 
 - React;
-- TypeScript.
+- TypeScript;
+- CSS Modules;
+- Vite.
 
 ## License
 
